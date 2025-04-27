@@ -1,19 +1,20 @@
-# Start from a lightweight Go base image
 FROM alpine:latest
 
-# Set working directory
-WORKDIR /app
+RUN apk add --no-cache wget unzip
 
-# Install wget and ca-certificates
-RUN apk add --no-cache wget ca-certificates
+# Download the correct PocketBase zip
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_0.27.1_linux_amd64.zip
 
-# Download the latest PocketBase release
-RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_0.27.1_linux_amd64.zip && \
-    unzip pocketbase_linux_amd64.zip && \
-    rm pocketbase_linux_amd64.zip && \
-    chmod +x pocketbase
+# Correct filename used here
+RUN unzip pocketbase_0.27.1_linux_amd64.zip
 
-# Expose PocketBase port
+# Clean up
+RUN rm pocketbase_0.27.1_linux_amd64.zip
+
+# Make the binary executable
+RUN chmod +x pocketbase
+
+# Expose port 8090
 EXPOSE 8090
 
 # Run PocketBase
