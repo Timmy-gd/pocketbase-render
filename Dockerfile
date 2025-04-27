@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apk add --no-cache wget ca-certificates
 
 # Download the latest PocketBase release
-RUN wget https://github.com/pocketbase/pocketbase/releases/latest/download/pocketbase_linux_amd64.zip && \
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_0.27.1_linux_amd64.zip && \
     unzip pocketbase_linux_amd64.zip && \
     rm pocketbase_linux_amd64.zip && \
     chmod +x pocketbase
