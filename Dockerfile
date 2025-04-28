@@ -14,8 +14,6 @@ RUN rm pocketbase_0.27.1_linux_amd64.zip
 # Make the binary executable
 RUN chmod +x pocketbase
 
-COPY pb_data ./pb_data
-
 # Expose port 8090
 EXPOSE 8090
 
