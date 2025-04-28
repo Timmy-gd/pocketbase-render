@@ -1,23 +1,16 @@
 FROM alpine:latest
 
-RUN apk add --no-cache wget unzip
+WORKDIR /app
 
-# Download the correct PocketBase zip
-RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_0.27.1_linux_amd64.zip
+RUN apk add --no-cache wget ca-certificates unzip
 
-# Correct filename used here
-RUN unzip pocketbase_0.27.1_linux_amd64.zip
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_0.27.1_linux_amd64.zip && \
+    unzip pocketbase_0.27.1_linux_amd64.zip && \
+    rm pocketbase_0.27.1_linux_amd64.zip && \
+    chmod +x pocketbase
 
-# Clean up
-RUN rm pocketbase_0.27.1_linux_amd64.zip
+# No COPY pb_data
 
-# Make the binary executable
-RUN chmod +x pocketbase
-
-COPY pb_data ./pb_data
-
-# Expose port 8090
 EXPOSE 8090
 
-# Run PocketBase
 CMD ["./pocketbase", "serve", "--http=0.0.0.0:8090"]
