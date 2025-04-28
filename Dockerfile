@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN apk add --no-cache wget unzip
 
 # Download the correct PocketBase zip
-RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_0.27.1_linux_amd64.zip
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.27.1/pocketbase_linux_amd64.zip
 
 # Correct filename used here
 RUN unzip pocketbase_0.27.1_linux_amd64.zip
